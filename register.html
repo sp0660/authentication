@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Army Personnel Registration</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        function validateForm() {
+            const form = document.forms["regForm"];
+            const pan = form["pan_no"].value;
+            const aadhar = form["aadhar_no"].value;
+            const contact = form["contact_no"].value;
+            const password = form["password"].value;
+            const confirmPassword = form["confirm_password"].value;
+
+            const panPattern = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
+            const aadharPattern = /^\d{12}$/;
+            const contactPattern = /^\d{10}$/;
+
+            if (!panPattern.test(pan)) {
+                alert("❌ Invalid PAN number format (e.g., ABCDE1234F)");
+                return false;
+            }
+
+            if (!aadharPattern.test(aadhar)) {
+                alert("❌ Aadhar number must be exactly 12 digits");
+                return false;
+            }
+
+            if (!contactPattern.test(contact)) {
+                alert("❌ Contact number must be exactly 10 digits");
+                return false;
+            }
+
+            if (password.length < 6) {
+                alert("❌ Password must be at least 6 characters");
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                alert("❌ Passwords do not match");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+    <h2>Army Personnel Registration</h2>
+    <form name="regForm" method="POST" action="register.php" onsubmit="return validateForm();">
+
+        <label>Army Number (Alphanumeric):</label>
+        <input type="text" name="army_number" pattern="[A-Za-z0-9]+" required>
+
+        <label>Rank:</label>
+        <select name="rank" required>
+            <option value="">-- Select Rank --</option>
+            <option>SEP</option>
+            <option>LNK</option>
+            <option>NK</option>
+            <option>HAV</option>
+            <option>Nb SUB</option>
+            <option>SUB</option>
+            <option>SM</option>
+        </select>
+
+        <label>Name:</label>
+        <input type="text" name="name" required>
+
+        <label>Unit:</label>
+        <select name="unit" required>
+            <option value="">-- Select Unit --</option>
+            <!-- Hardcoded 2 to 21 Dogra -->
+            <option>2 Dogra</option>
+            <option>3 Dogra</option>
+            <option>4 Dogra</option>
+            <option>5 Dogra</option>
+            <option>6 Dogra</option>
+            <option>7 Dogra</option>
+            <option>8 Dogra</option>
+            <option>9 Dogra</option>
+            <option>10 Dogra</option>
+            <option>11 Dogra</option>
+            <option>12 Dogra</option>
+            <option>13 Dogra</option>
+            <option>14 Dogra</option>
+            <option>15 Dogra</option>
+            <option>16 Dogra</option>
+            <option>17 Dogra</option>
+            <option>18 Dogra</option>
+            <option>19 Dogra</option>
+            <option>20 Dogra</option>
+            <option>21 Dogra</option>
+        </select>
+
+        <label>Date of Birth:</label>
+        <input type="date" name="dob" required>
+
+        <label>Date of Enrolment:</label>
+        <input type="date" name="enrolment_date" required>
+
+        <label>PAN Number:</label>
+        <input type="text" name="pan_no" pattern="[A-Z]{5}[0-9]{4}[A-Z]" maxlength="10" required>
+
+        <label>Aadhar Number:</label>
+        <input type="text" name="aadhar_no" pattern="\d{12}" maxlength="12" required>
+
+        <label>Contact Number:</label>
+        <input type="text" name="contact_no" pattern="\d{10}" maxlength="10" required>
+
+        <label>Email Address:</label>
+        <input type="email" name="email" required>
+
+        <label>Password (min 6 characters):</label>
+        <input type="password" name="password" minlength="6" required>
+
+        <label>Confirm Password:</label>
+        <input type="password" name="confirm_password" minlength="6" required>
+
+        <button type="submit">Register</button>
+    </form>
+</body>
+
+</html>
